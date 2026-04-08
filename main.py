@@ -13,7 +13,7 @@ def main():
     if not os.path.exists("logs"):
         os.makedirs("logs")
 
-    # Clear old logs (optional but recommended)
+    # Clear old logs
     open("logs/monitoring.log", "w").close()
 
     # -----------------------------------
@@ -37,7 +37,7 @@ def main():
     print("\n🔎 Detection Results:\n")
 
     if not alerts:
-        print("✅ No suspicious activity detected.")
+        print("✅ No suspicious parent-child activity detected.")
     else:
         for alert in alerts:
             print(alert)
