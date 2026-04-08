@@ -1,2 +1,14 @@
-[2026-04-08 15:51:20] Suspicious Parent-Child: explorer.exe → cmd.exe
-[2026-04-08 15:51:20] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 16:00:51] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 16:00:51] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 16:00:57] SERVICE: AdobeARMservice | Auto | Running | "C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\armsvc.exe"
+[2026-04-08 16:00:57] SERVICE: ADPSvc | Manual | Stopped | C:\WINDOWS\system32\svchost.exe -k LocalServiceAndNoImpersonation -p
+[2026-04-08 16:00:57] SERVICE: ALG | Manual | Stopped | C:\WINDOWS\System32\alg.exe
+[2026-04-08 16:00:57] SERVICE: AppIDSvc | Manual | Stopped | C:\WINDOWS\system32\svchost.exe -k LocalServiceNetworkRestricted -p
+[2026-04-08 16:00:57] SERVICE: Appinfo | Manual | Running | C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+[2026-04-08 16:00:57] SERVICE: AppMgmt | Manual | Stopped | C:\WINDOWS\system32\svchost.exe -k netsvcs -p
+[2026-04-08 16:00:57] SERVICE: AppReadiness | Manual | Stopped | C:\WINDOWS\System32\svchost.exe -k AppReadiness -p
+[2026-04-08 16:00:57] SERVICE: AppVClient | Disabled | Stopped | C:\WINDOWS\system32\AppVClient.exe
+[2026-04-08 16:00:57] SERVICE: AppXSvc | Auto | Stopped | C:\WINDOWS\system32\svchost.exe -k wsappx -p
+[2026-04-08 16:00:57] SERVICE: ApxSvc | Manual | Stopped | C:\WINDOWS\system32\svchost.exe -k LocalService -p
+[2026-04-08 16:00:57] Service Missing Path: LSM
+[2026-04-08 16:00:57] Service Missing Path: NetSetupSvc
