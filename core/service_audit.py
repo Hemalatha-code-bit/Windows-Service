@@ -24,6 +24,15 @@ SAFE_DIRECTORIES = [
 
 
 # -----------------------------------
+# Normalize path (IMPORTANT FIX)
+# -----------------------------------
+def normalize_path(path):
+    if not path:
+        return ""
+    return path.replace('"', '').lower().strip()
+
+
+# -----------------------------------
 # Get all Windows services
 # -----------------------------------
 def get_all_services():
@@ -76,14 +85,14 @@ def detect_suspicious_services(services):
     for service in services:
         name = service.get("name")
         original_path = service.get("path") or ""
-        path = original_path.lower()
+        clean_path = normalize_path(original_path)
         start_mode = service.get("start_mode")
 
         # -----------------------------------
         # 1. Suspicious path detection
         # -----------------------------------
         for sp in SUSPICIOUS_PATHS:
-            if sp in path:
+            if sp in clean_path:
                 alerts.append(
                     f"Suspicious Service Path: {name} → {original_path}"
                 )
@@ -91,7 +100,7 @@ def detect_suspicious_services(services):
         # -----------------------------------
         # 2. Auto-start suspicious service
         # -----------------------------------
-        if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
+        if start_mode == "Auto" and any(sp in clean_path for sp in SUSPICIOUS_PATHS):
             alerts.append(
                 f"Auto-Start Suspicious Service: {name} → {original_path}"
             )
@@ -99,19 +108,19 @@ def detect_suspicious_services(services):
         # -----------------------------------
         # 3. Missing path (ignore known system services)
         # -----------------------------------
-        if not path and name not in KNOWN_SYSTEM_SERVICES:
+        if not clean_path and name not in KNOWN_SYSTEM_SERVICES:
             alerts.append(f"Service Missing Path: {name}")
 
         # -----------------------------------
-        # 4. New service detection (baseline comparison)
+        # 4. New service detection
         # -----------------------------------
         if baseline and name not in baseline:
             alerts.append(f"New Service Detected: {name}")
 
         # -----------------------------------
-        # 5. Improved permission/path check
+        # 5. Improved permission/path check (FIXED)
         # -----------------------------------
-        if path and not any(path.startswith(sd) for sd in SAFE_DIRECTORIES):
+        if clean_path and not any(clean_path.startswith(sd) for sd in SAFE_DIRECTORIES):
             alerts.append(
                 f"Service running from unusual directory: {name} → {original_path}"
             )
@@ -126,7 +135,7 @@ def detect_suspicious_services(services):
 
 
 # -----------------------------------
-# Print sample services (for demo)
+# Print sample services
 # -----------------------------------
 def print_services(services, limit=10):
     print("\n⚙️ Startup Services (Sample):\n")
