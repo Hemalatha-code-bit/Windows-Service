@@ -1,3 +1,5 @@
+[2026-04-08 12:30:10] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 12:30:10] Possible Injection: explorer.exe → cmd.exe
 [2026-04-08 16:00:51] Suspicious Parent-Child: explorer.exe → cmd.exe
 [2026-04-08 16:00:51] Possible Injection: explorer.exe → cmd.exe
 [2026-04-08 16:00:57] SERVICE: AdobeARMservice | Auto | Running | "C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\armsvc.exe"
