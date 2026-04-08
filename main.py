@@ -1,13 +1,24 @@
 # main.py
 
 import os
+import shutil
 from core.process_monitor import get_all_processes, print_process_lineage
 from core.anomaly_detector import detect_anomalies
 from utils.logger import log_alert
 
 
+def clear_cache():
+    for root, dirs, files in os.walk("."):
+        for d in dirs:
+            if d == "__pycache__":
+                shutil.rmtree(os.path.join(root, d))
+
+
 def main():
     print("🔍 Running Parent-Child Monitoring...\n")
+
+    # Clear cache
+    clear_cache()
 
     # Ensure logs folder exists
     if not os.path.exists("logs"):
@@ -16,24 +27,11 @@ def main():
     # Clear old logs
     open("logs/monitoring.log", "w").close()
 
-    # -----------------------------------
-    # STEP 1: Get processes
-    # -----------------------------------
     processes = get_all_processes()
-
-    # -----------------------------------
-    # STEP 2: Show process lineage
-    # -----------------------------------
     print_process_lineage(processes)
 
-    # -----------------------------------
-    # STEP 3: Detect anomalies
-    # -----------------------------------
     alerts = detect_anomalies(processes)
 
-    # -----------------------------------
-    # STEP 4: Print & log results
-    # -----------------------------------
     print("\n🔎 Detection Results:\n")
 
     if not alerts:
