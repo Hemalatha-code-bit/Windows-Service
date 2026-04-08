@@ -27,29 +27,38 @@ def detect_suspicious_services(services):
 
     for service in services:
         name = service.get("name")
-        path = (service.get("path") or "").lower()
+        raw_path = service.get("path") or ""
+        path = raw_path.lower().strip()
         start_mode = service.get("start_mode")
 
-        # Skip normal system paths
-        if "windows\\system32" in path:
-            continue
-
-        # Suspicious path
-        for sp in SUSPICIOUS_PATHS:
-            if sp in path:
-                alerts.append(f"Suspicious Service Path: {name} → {service.get('path')}")
-
-        # Auto-start suspicious service
-        if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(f"Auto-Start Suspicious Service: {name} → {service.get('path')}")
-
-        # Basic permission risk (user directory execution)
-        if "users" in path and "system32" not in path:
-            alerts.append(f"Potential Weak Permission Service: {name} → {service.get('path')}")
-
-        # Missing path
+        #Missing or empty path
         if not path:
             alerts.append(f"Service Missing Path: {name}")
+            continue
+
+        # Normalize quotes
+        path = path.replace('"', '')
+
+        # Skip trusted Windows directories (reduce false positives)
+        if any(x in path for x in [
+            "windows\\system32",
+            "windows\\syswow64",
+            "windows\\servicing",
+            "microsoft.net"
+        ]):
+            continue
+
+        #Suspicious path detection
+        if any(sp in path for sp in SUSPICIOUS_PATHS):
+            alerts.append(f"Suspicious Service Path: {name} → {raw_path}")
+
+        #Auto-start + suspicious path (persistence indicator)
+        if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
+            alerts.append(f"Auto-Start Suspicious Service: {name} → {raw_path}")
+
+        #Permission risk (user-writable directory execution)
+        if "users" in path:
+            alerts.append(f"Potential Weak Permission Service: {name} → {raw_path}")
 
     return alerts
 
