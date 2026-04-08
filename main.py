@@ -3,77 +3,45 @@
 import os
 from core.process_monitor import get_all_processes, print_process_lineage
 from core.anomaly_detector import detect_anomalies
-from core.service_audit import (
-    get_all_services,
-    detect_suspicious_services,
-    print_services
-)
 from utils.logger import log_alert
 
 
 def main():
-    print("🔍 Running Windows Monitoring Agent...\n")
+    print("🔍 Running Parent-Child Monitoring...\n")
 
     # Ensure logs folder exists
     if not os.path.exists("logs"):
         os.makedirs("logs")
 
-    # Clear old logs
+    # Clear old logs (optional but recommended)
     open("logs/monitoring.log", "w").close()
 
     # -----------------------------------
-    # STEP 1: Process Monitoring
+    # STEP 1: Get processes
     # -----------------------------------
     processes = get_all_processes()
+
+    # -----------------------------------
+    # STEP 2: Show process lineage
+    # -----------------------------------
     print_process_lineage(processes)
 
     # -----------------------------------
-    # STEP 2: Process Detection
+    # STEP 3: Detect anomalies
     # -----------------------------------
-    process_alerts = detect_anomalies(processes)
+    alerts = detect_anomalies(processes)
 
-    print("\n🔎 Process Detection Results:\n")
+    # -----------------------------------
+    # STEP 4: Print & log results
+    # -----------------------------------
+    print("\n🔎 Detection Results:\n")
 
-    if not process_alerts:
-        print("✅ No suspicious process activity detected.")
+    if not alerts:
+        print("✅ No suspicious activity detected.")
     else:
-        for alert in process_alerts:
+        for alert in alerts:
             print(alert)
             log_alert(alert)
 
-    # -----------------------------------
-    # STEP 3: Service Audit
-    # -----------------------------------
-    services = get_all_services()
-    print_services(services)
 
-    # Log sample services (limit to 10)
-    for service in services[:10]:
-        log_alert(
-            f"SERVICE: {service['name']} | {service['start_mode']} | {service['state']} | {service['path']}"
-        )
-
-    service_alerts = detect_suspicious_services(services)
-
-    print("\n⚙️ Service Audit Results:\n")
-
-    if not service_alerts:
-        print("✅ No suspicious services detected.")
-    else:
-        for alert in service_alerts:
-            print(alert)
-            log_alert(alert)
-
-    # -----------------------------------
-    # FINAL SUMMARY
-    # -----------------------------------
-    total_alerts = len(process_alerts) + len(service_alerts)
-
-    print("\n📊 Final Summary:\n")
-    print(f"Total Processes Scanned: {len(processes)}")
-    print(f"Total Services Scanned: {len(services)}")
-    print(f"Total Alerts Generated: {total_alerts}")
-
-
-if __name__ == "__main__":
-    main()
+if
