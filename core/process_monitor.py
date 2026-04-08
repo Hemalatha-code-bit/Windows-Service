@@ -15,7 +15,7 @@ def get_all_processes():
 
 
 def print_process_lineage(processes, limit=10):
-    print("\n🔍 Process Lineage (Sample):\n")
+    print("\n Process Lineage (Sample):\n")
 
     count = 0
     for pid, proc in processes.items():
