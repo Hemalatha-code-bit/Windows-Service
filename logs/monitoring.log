@@ -1,1 +1,2 @@
-
+[2026-04-08 19:06:48] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 19:06:48] Possible Injection: explorer.exe → cmd.exe
