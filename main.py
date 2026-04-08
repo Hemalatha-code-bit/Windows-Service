@@ -4,6 +4,8 @@ import os
 from core.process_monitor import get_all_processes, print_process_lineage
 from core.anomaly_detector import detect_anomalies
 from utils.logger import log_alert
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 
 
 def main():
