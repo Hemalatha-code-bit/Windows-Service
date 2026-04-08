@@ -1,2 +1,4 @@
 [2026-04-08 19:16:46] Suspicious Parent-Child: explorer.exe → cmd.exe
 [2026-04-08 19:16:46] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 19:19:37] Service Missing Path: LSM
+[2026-04-08 19:19:37] Service Missing Path: NetSetupSvc
