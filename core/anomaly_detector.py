@@ -1,36 +1,35 @@
 # core/anomaly_detector.py
 
-from datetime import datetime
 from config import SUSPICIOUS_PARENT_CHILD
 
 
-def detect_parent_child_anomalies(processes):
+def detect_anomalies(processes):
     alerts = []
 
     for pid, proc in processes.items():
-        parent_pid = proc.get("ppid")
-        parent_proc = processes.get(parent_pid)
+        parent = processes.get(proc['ppid'])
 
-        if not parent_proc:
+        if not parent:
             continue
 
-        parent_name = (parent_proc.get("name") or "").lower()
-        child_name = (proc.get("name") or "").lower()
+        parent_name = parent['name'].lower()
+        child_name = proc['name'].lower()
 
-        # Apply detection rules
+        # 🚨 Suspicious Parent-Child
         if parent_name in SUSPICIOUS_PARENT_CHILD:
             if child_name in SUSPICIOUS_PARENT_CHILD[parent_name]:
+                alerts.append(f"🚨 Suspicious Parent-Child: {parent_name} → {child_name}")
 
-                alert = {
-                    "timestamp": str(datetime.now()),
-                    "alert_type": "Suspicious Parent-Child Relationship",
-                    "parent_process": parent_name,
-                    "child_process": child_name,
-                    "pid": pid,
-                    "ppid": parent_pid,
-                    "severity": "HIGH"
-                }
+        # ⚠️ Suspicious Chain (Grandparent → Parent → Child)
+        grandparent = processes.get(parent['ppid'])
+        if grandparent:
+            chain = f"{grandparent['name']} → {parent_name} → {child_name}"
 
-                alerts.append(alert)
+            if "winword.exe" in chain and "powershell.exe" in chain:
+                alerts.append(f"⚠️ Suspicious Process Chain: {chain}")
+
+        # ⚠️ Injection Indicator (basic heuristic)
+        if parent_name == "explorer.exe" and child_name not in ["chrome.exe", "msedge.exe"]:
+            alerts.append(f"⚠️ Possible Injection: {parent_name} → {child_name}")
 
     return alerts
