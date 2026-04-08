@@ -16,28 +16,20 @@ def main():
     # Clear old logs
     open("logs/monitoring.log", "w").close()
 
-    # -----------------------------------
     # STEP 1: Get processes
-    # -----------------------------------
     processes = get_all_processes()
 
-    # -----------------------------------
     # STEP 2: Show process lineage
-    # -----------------------------------
     print_process_lineage(processes)
 
-    # -----------------------------------
     # STEP 3: Detect anomalies
-    # -----------------------------------
     alerts = detect_anomalies(processes)
 
-    # -----------------------------------
     # STEP 4: Print & log results
-    # -----------------------------------
     print("\n🔎 Detection Results:\n")
 
     if not alerts:
-        print("✅ No suspicious parent-child activity detected.")
+        print("✅ No suspicious activity detected.")
     else:
         for alert in alerts:
             print(alert)
