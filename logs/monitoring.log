@@ -1,1 +1,3 @@
 
+Suspicious Parent-Child: explorer.exe → cmd.exe
+Possible Injection: explorer.exe → cmd.exe
