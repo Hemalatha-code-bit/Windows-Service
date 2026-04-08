@@ -1,2 +1,80 @@
 [2026-04-08 14:36:29] Suspicious Parent-Child: explorer.exe → cmd.exe
 [2026-04-08 14:36:29] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 15:04:06] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 15:04:06] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 15:04:12] Service Missing Path: LSM
+[2026-04-08 15:04:12] Service Missing Path: NetSetupSvc
+[2026-04-08 15:08:33] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 15:08:33] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 15:08:39] Service running outside system directory: AdobeARMservice → "C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\armsvc.exe"
+[2026-04-08 15:08:39] Service running outside system directory: brlapi → C:\WINDOWS\brltty\bin\brltty.exe
+[2026-04-08 15:08:39] Service running outside system directory: edgeupdate → "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /svc
+[2026-04-08 15:08:39] Service running outside system directory: edgeupdatem → "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /medsvc
+[2026-04-08 15:08:39] Service running outside system directory: FA_Scheduler → "C:\Program Files\Fortinet\FortiClient\scheduler.exe"
+[2026-04-08 15:08:39] Service running outside system directory: FontCache3.0.0.0 → C:\WINDOWS\Microsoft.Net\Framework64\v3.0\WPF\PresentationFontCache.exe
+[2026-04-08 15:08:39] Service running outside system directory: GoogleChromeElevationService → "C:\Program Files\Google\Chrome\Application\146.0.7680.178\elevation_service.exe"
+[2026-04-08 15:08:39] Service running outside system directory: GoogleUpdaterInternalService148.0.7730.0 → "C:\Program Files (x86)\Google\GoogleUpdater\148.0.7730.0\updater.exe" --system --windows-service --service=update-internal
+[2026-04-08 15:08:39] Service running outside system directory: GoogleUpdaterService148.0.7730.0 → "C:\Program Files (x86)\Google\GoogleUpdater\148.0.7730.0\updater.exe" --system --windows-service --service=update
+[2026-04-08 15:08:39] Service running outside system directory: HPAppHelperCap → "C:\Program Files\HP\HP Enabling Services\AppHelperCap.exe"
+[2026-04-08 15:08:39] Service running outside system directory: HPDiagsCap → "C:\Program Files\HP\HP Enabling Services\DiagsCap.exe"
+[2026-04-08 15:08:39] Service running outside system directory: HPNetworkCap → "C:\Program Files\HP\HP Enabling Services\NetworkCap.exe"
+[2026-04-08 15:08:39] Service running outside system directory: HPSysInfoCap → "C:\Program Files\HP\HP Enabling Services\SysInfoCap.exe"
+[2026-04-08 15:08:39] Service running outside system directory: IntelGraphicsSoftwareService → "C:\Program Files\WindowsApps\AppUp.IntelArcSoftware_26.4.2155.0_x64__8j3eq9eme6ctt\VFS\ProgramFilesX64\Intel\Intel Graphics Software\IntelGraphicsSoftware.Service.exe"
+[2026-04-08 15:08:39] Service running outside system directory: MDCoreSvc → "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26020.6-0\MpDefenderCoreService.exe"
+[2026-04-08 15:08:39] Service running outside system directory: MicrosoftEdgeElevationService → "C:\Program Files (x86)\Microsoft\Edge\Application\146.0.3856.97\elevation_service.exe"
+[2026-04-08 15:08:39] Service running outside system directory: MozillaMaintenance → "C:\Program Files (x86)\Mozilla Maintenance Service\maintenanceservice.exe"
+[2026-04-08 15:08:39] Service running outside system directory: NetTcpPortSharing → C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe
+[2026-04-08 15:08:39] Service running outside system directory: ose64 → "C:\Program Files\Common Files\Microsoft Shared\Source Engine\OSE.EXE"
+[2026-04-08 15:08:39] Service running outside system directory: PerfHost → C:\WINDOWS\SysWow64\perfhost.exe
+[2026-04-08 15:08:39] Service running outside system directory: RtkBtManServ → C:\WINDOWS\RtkBtManServ.exe
+[2026-04-08 15:08:39] Service running outside system directory: SECOMNService → "C:\WINDOWS\System32\SECOMN64.exe"
+[2026-04-08 15:08:39] Service running outside system directory: Sense → "C:\Program Files\Windows Defender Advanced Threat Protection\MsSense.exe"
+[2026-04-08 15:08:39] Service running outside system directory: TrustedInstaller → C:\WINDOWS\servicing\TrustedInstaller.exe
+[2026-04-08 15:08:39] Service running outside system directory: VBoxSDS → "C:\Program Files\Oracle\VirtualBox\VBoxSDS.exe"
+[2026-04-08 15:08:39] Service running outside system directory: wbengine → "C:\WINDOWS\system32\wbengine.exe"
+[2026-04-08 15:08:39] Service running outside system directory: WdNisSvc → "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26020.6-0\NisSrv.exe"
+[2026-04-08 15:08:39] Service running outside system directory: WinDefend → "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26020.6-0\MsMpEng.exe"
+[2026-04-08 15:08:39] Service running outside system directory: WMPNetworkSvc → "C:\Program Files\Windows Media Player\wmpnetwk.exe"
+[2026-04-08 15:08:39] Service running outside system directory: WslInstaller → "C:\Program Files\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForLinux_2.5.7.0_x64__8wekyb3d8bbwe\wslinstaller.exe"
+[2026-04-08 15:08:39] Service running outside system directory: WSLService → "C:\Program Files\WSL\wslservice.exe"
+[2026-04-08 15:13:52] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 15:13:52] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 15:13:58] Service running from unusual directory: AdobeARMservice → "C:\Program Files (x86)\Common Files\Adobe\ARM\1.0\armsvc.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: brlapi → C:\WINDOWS\brltty\bin\brltty.exe
+[2026-04-08 15:13:58] Service running from unusual directory: edgeupdate → "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /svc
+[2026-04-08 15:13:58] Service running from unusual directory: edgeupdatem → "C:\Program Files (x86)\Microsoft\EdgeUpdate\MicrosoftEdgeUpdate.exe" /medsvc
+[2026-04-08 15:13:58] Service running from unusual directory: FA_Scheduler → "C:\Program Files\Fortinet\FortiClient\scheduler.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: FontCache3.0.0.0 → C:\WINDOWS\Microsoft.Net\Framework64\v3.0\WPF\PresentationFontCache.exe
+[2026-04-08 15:13:58] Service running from unusual directory: GoogleChromeElevationService → "C:\Program Files\Google\Chrome\Application\146.0.7680.178\elevation_service.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: GoogleUpdaterInternalService148.0.7730.0 → "C:\Program Files (x86)\Google\GoogleUpdater\148.0.7730.0\updater.exe" --system --windows-service --service=update-internal
+[2026-04-08 15:13:58] Service running from unusual directory: GoogleUpdaterService148.0.7730.0 → "C:\Program Files (x86)\Google\GoogleUpdater\148.0.7730.0\updater.exe" --system --windows-service --service=update
+[2026-04-08 15:13:58] Service running from unusual directory: HPAppHelperCap → "C:\Program Files\HP\HP Enabling Services\AppHelperCap.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: HPDiagsCap → "C:\Program Files\HP\HP Enabling Services\DiagsCap.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: HPNetworkCap → "C:\Program Files\HP\HP Enabling Services\NetworkCap.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: HPSysInfoCap → "C:\Program Files\HP\HP Enabling Services\SysInfoCap.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: IntelGraphicsSoftwareService → "C:\Program Files\WindowsApps\AppUp.IntelArcSoftware_26.4.2155.0_x64__8j3eq9eme6ctt\VFS\ProgramFilesX64\Intel\Intel Graphics Software\IntelGraphicsSoftware.Service.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: MDCoreSvc → "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26020.6-0\MpDefenderCoreService.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: MicrosoftEdgeElevationService → "C:\Program Files (x86)\Microsoft\Edge\Application\146.0.3856.97\elevation_service.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: MozillaMaintenance → "C:\Program Files (x86)\Mozilla Maintenance Service\maintenanceservice.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: NetTcpPortSharing → C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe
+[2026-04-08 15:13:58] Service running from unusual directory: ose64 → "C:\Program Files\Common Files\Microsoft Shared\Source Engine\OSE.EXE"
+[2026-04-08 15:13:58] Service running from unusual directory: PerfHost → C:\WINDOWS\SysWow64\perfhost.exe
+[2026-04-08 15:13:58] Service running from unusual directory: RtkBtManServ → C:\WINDOWS\RtkBtManServ.exe
+[2026-04-08 15:13:58] Service running from unusual directory: SECOMNService → "C:\WINDOWS\System32\SECOMN64.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: Sense → "C:\Program Files\Windows Defender Advanced Threat Protection\MsSense.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: TrustedInstaller → C:\WINDOWS\servicing\TrustedInstaller.exe
+[2026-04-08 15:13:58] Service running from unusual directory: VBoxSDS → "C:\Program Files\Oracle\VirtualBox\VBoxSDS.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: wbengine → "C:\WINDOWS\system32\wbengine.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: WdNisSvc → "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26020.6-0\NisSrv.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: WinDefend → "C:\ProgramData\Microsoft\Windows Defender\Platform\4.18.26020.6-0\MsMpEng.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: WMPNetworkSvc → "C:\Program Files\Windows Media Player\wmpnetwk.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: WslInstaller → "C:\Program Files\WindowsApps\MicrosoftCorporationII.WindowsSubsystemForLinux_2.5.7.0_x64__8wekyb3d8bbwe\wslinstaller.exe"
+[2026-04-08 15:13:58] Service running from unusual directory: WSLService → "C:\Program Files\WSL\wslservice.exe"
+[2026-04-08 15:18:43] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 15:18:43] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 15:18:50] Service running from unusual directory: brlapi → C:\WINDOWS\brltty\bin\brltty.exe
+[2026-04-08 15:18:50] Service running from unusual directory: FontCache3.0.0.0 → C:\WINDOWS\Microsoft.Net\Framework64\v3.0\WPF\PresentationFontCache.exe
+[2026-04-08 15:18:50] Service running from unusual directory: NetTcpPortSharing → C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe
+[2026-04-08 15:18:50] Service running from unusual directory: PerfHost → C:\WINDOWS\SysWow64\perfhost.exe
+[2026-04-08 15:18:50] Service running from unusual directory: RtkBtManServ → C:\WINDOWS\RtkBtManServ.exe
+[2026-04-08 15:18:50] Service running from unusual directory: TrustedInstaller → C:\WINDOWS\servicing\TrustedInstaller.exe
