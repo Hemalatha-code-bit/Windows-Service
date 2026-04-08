@@ -4,7 +4,11 @@ import os
 from core.process_monitor import get_all_processes, print_process_lineage
 from core.anomaly_detector import detect_anomalies
 from utils.logger import log_alert
-
+from core.service_audit import (
+    get_all_services,
+    detect_suspicious_services,
+    print_services
+)
 
 def main():
     print(" Running Parent-Child Monitoring...\n")
