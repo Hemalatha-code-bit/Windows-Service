@@ -1,35 +1,16 @@
 # core/service_audit.py
 
 import wmi
-import os
 
 # -----------------------------------
-# Suspicious paths (common malware locations)
+# Suspicious paths (user-writable locations)
 # -----------------------------------
-SUSPICIOUS_PATHS = ["temp", "appdata", "downloads"]
-
-# Baseline file
-BASELINE_FILE = "data/services_baseline.txt"
-
-# Known safe system services (reduce false positives)
-KNOWN_SYSTEM_SERVICES = ["LSM", "NetSetupSvc"]
-
-# Safe directories (legitimate service locations)
-SAFE_DIRECTORIES = [
-    "c:\\windows\\system32",
-    "c:\\program files",
-    "c:\\program files (x86)",
-    "c:\\programdata"
+SUSPICIOUS_PATHS = [
+    "appdata",
+    "temp",
+    "downloads",
+    "users"
 ]
-
-
-# -----------------------------------
-# Normalize path (IMPORTANT FIX)
-# -----------------------------------
-def normalize_path(path):
-    if not path:
-        return ""
-    return path.replace('"', '').lower().strip()
 
 
 # -----------------------------------
@@ -52,84 +33,42 @@ def get_all_services():
 
 
 # -----------------------------------
-# Save baseline (first run)
-# -----------------------------------
-def save_baseline(services):
-    if not os.path.exists("data"):
-        os.makedirs("data")
-
-    with open(BASELINE_FILE, "w") as f:
-        for service in services:
-            f.write(service["name"] + "\n")
-
-
-# -----------------------------------
-# Load baseline
-# -----------------------------------
-def load_baseline():
-    if not os.path.exists(BASELINE_FILE):
-        return []
-
-    with open(BASELINE_FILE, "r") as f:
-        return [line.strip() for line in f.readlines()]
-
-
-# -----------------------------------
 # Detect suspicious services
 # -----------------------------------
 def detect_suspicious_services(services):
     alerts = []
 
-    baseline = load_baseline()
-
     for service in services:
         name = service.get("name")
-        original_path = service.get("path") or ""
-        clean_path = normalize_path(original_path)
+        path = (service.get("path") or "").lower()
         start_mode = service.get("start_mode")
 
-        # -----------------------------------
-        # 1. Suspicious path detection
-        # -----------------------------------
+        # ❌ Skip normal Windows system paths
+        if "windows\\system32" in path:
+            continue
+
+        # 🚨 Suspicious path detection
         for sp in SUSPICIOUS_PATHS:
-            if sp in clean_path:
+            if sp in path:
                 alerts.append(
-                    f"Suspicious Service Path: {name} → {original_path}"
+                    f"Suspicious Service Path: {name} → {service.get('path')}"
                 )
 
-        # -----------------------------------
-        # 2. Auto-start suspicious service
-        # -----------------------------------
-        if start_mode == "Auto" and any(sp in clean_path for sp in SUSPICIOUS_PATHS):
+        # 🚨 Auto-start service from suspicious location
+        if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
             alerts.append(
-                f"Auto-Start Suspicious Service: {name} → {original_path}"
+                f"Auto-Start Suspicious Service: {name} → {service.get('path')}"
             )
 
-        # -----------------------------------
-        # 3. Missing path (ignore known system services)
-        # -----------------------------------
-        if not clean_path and name not in KNOWN_SYSTEM_SERVICES:
+        # ⚠️ Basic permission risk (user directory execution)
+        if "users" in path and "system32" not in path:
+            alerts.append(
+                f"Potential Weak Permission Service: {name} → {service.get('path')}"
+            )
+
+        # ⚠️ Missing path
+        if not path:
             alerts.append(f"Service Missing Path: {name}")
-
-        # -----------------------------------
-        # 4. New service detection
-        # -----------------------------------
-        if baseline and name not in baseline:
-            alerts.append(f"New Service Detected: {name}")
-
-        # -----------------------------------
-        # 5. Improved permission/path check (FIXED)
-        # -----------------------------------
-        if clean_path and not any(clean_path.startswith(sd) for sd in SAFE_DIRECTORIES):
-            alerts.append(
-                f"Service running from unusual directory: {name} → {original_path}"
-            )
-
-    # -----------------------------------
-    # Save baseline if first run
-    # -----------------------------------
-    if not baseline:
-        save_baseline(services)
 
     return alerts
 
