@@ -1,3 +1,5 @@
+[2026-04-08 12:30:10] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 12:30:10] Possible Injection: explorer.exe → cmd.exe
 [2026-04-08 15:39:21] Suspicious Parent-Child: explorer.exe → cmd.exe
 [2026-04-08 15:39:21] Possible Injection: explorer.exe → cmd.exe
 [2026-04-08 15:39:27] Service running from unusual directory: brlapi → C:\WINDOWS\brltty\bin\brltty.exe
