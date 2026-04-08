@@ -29,7 +29,7 @@ def main():
     print("\n🔎 Detection Results:\n")
 
     if not alerts:
-        print("✅ No suspicious activity detected.")
+        print("✅ No suspicious parent-child activity detected.")
     else:
         for alert in alerts:
             print(alert)
