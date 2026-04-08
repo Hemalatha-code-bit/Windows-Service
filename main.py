@@ -1,8 +1,7 @@
 # main.py
 
-from core.process_monitor import get_all_processes
-from core.anomaly_detector import detect_parent_child_anomalies
-from utils.logger import log_alert
+from core.process_monitor import get_all_processes, print_process_lineage
+from core.anomaly_detector import detect_anomalies
 
 
 def main():
@@ -10,17 +9,20 @@ def main():
 
     processes = get_all_processes()
 
-    alerts = detect_parent_child_anomalies(processes)
+    # ✅ Show lineage
+    print_process_lineage(processes)
+
+    # ✅ Detect anomalies
+    alerts = detect_anomalies(processes)
+
+    print("\n🔎 Detection Results:\n")
 
     if not alerts:
-        print("✅ No suspicious parent-child activity detected.")
+        print("✅ No suspicious activity detected.")
         return
-
-    print("🚨 Suspicious Activities Detected:\n")
 
     for alert in alerts:
         print(alert)
-        log_alert(alert)
 
 
 if __name__ == "__main__":
