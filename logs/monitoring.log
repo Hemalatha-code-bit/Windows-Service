@@ -1,1 +1,8 @@
-
+[2026-04-08 15:39:21] Suspicious Parent-Child: explorer.exe → cmd.exe
+[2026-04-08 15:39:21] Possible Injection: explorer.exe → cmd.exe
+[2026-04-08 15:39:27] Service running from unusual directory: brlapi → C:\WINDOWS\brltty\bin\brltty.exe
+[2026-04-08 15:39:27] Service running from unusual directory: FontCache3.0.0.0 → C:\WINDOWS\Microsoft.Net\Framework64\v3.0\WPF\PresentationFontCache.exe
+[2026-04-08 15:39:27] Service running from unusual directory: NetTcpPortSharing → C:\WINDOWS\Microsoft.NET\Framework64\v4.0.30319\SMSvcHost.exe
+[2026-04-08 15:39:27] Service running from unusual directory: PerfHost → C:\WINDOWS\SysWow64\perfhost.exe
+[2026-04-08 15:39:27] Service running from unusual directory: RtkBtManServ → C:\WINDOWS\RtkBtManServ.exe
+[2026-04-08 15:39:27] Service running from unusual directory: TrustedInstaller → C:\WINDOWS\servicing\TrustedInstaller.exe
