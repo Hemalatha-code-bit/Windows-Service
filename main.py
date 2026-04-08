@@ -1,16 +1,18 @@
 # main.py
 
 import os
-from core.service_audit import (
-    get_all_services,
-    detect_suspicious_services,
-    print_services
-)
+import sys
+
+from core.process_monitor import get_all_processes, print_process_lineage
+from core.anomaly_detector import detect_anomalies
 from utils.logger import log_alert
+
+# Fix Unicode encoding issue (Windows console)
+sys.stdout.reconfigure(encoding='utf-8')
 
 
 def main():
-    print("Running Startup Service Audit...\n")
+    print("Running Parent-Child Monitoring...\n")
 
     # Ensure logs folder exists
     if not os.path.exists("logs"):
@@ -19,36 +21,24 @@ def main():
     # Clear old logs
     open("logs/monitoring.log", "w").close()
 
-    # -----------------------------------
-    # STEP 1: Get all services
-    # -----------------------------------
-    services = get_all_services()
+    # STEP 1: Get processes
+    processes = get_all_processes()
 
-    # -----------------------------------
-    # STEP 2: Print services
-    # -----------------------------------
-    print_services(services)
+    # STEP 2: Show process lineage
+    print_process_lineage(processes)
 
-    # -----------------------------------
-    # STEP 3: Detect suspicious services
-    # -----------------------------------
-    alerts = detect_suspicious_services(services)
+    # STEP 3: Detect anomalies
+    alerts = detect_anomalies(processes)
 
-    print("\nService Audit Results:\n")
+    # STEP 4: Print & log results
+    print("\nDetection Results:\n")
 
     if not alerts:
-        print("No suspicious services detected.")
+        print("No suspicious parent-child activity detected.")
     else:
         for alert in alerts:
             print(alert)
             log_alert(alert)
-
-    # -----------------------------------
-    # SUMMARY
-    # -----------------------------------
-    print("\nSummary:\n")
-    print(f"Total Services Scanned: {len(services)}")
-    print(f"Total Alerts: {len(alerts)}")
 
 
 if __name__ == "__main__":
