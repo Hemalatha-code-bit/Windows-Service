@@ -11,8 +11,16 @@ SUSPICIOUS_PATHS = ["temp", "appdata", "downloads"]
 # Baseline file
 BASELINE_FILE = "data/services_baseline.txt"
 
-# Known safe system services (to reduce false positives)
+# Known safe system services (reduce false positives)
 KNOWN_SYSTEM_SERVICES = ["LSM", "NetSetupSvc"]
+
+# Safe directories (legitimate service locations)
+SAFE_DIRECTORIES = [
+    "c:\\windows\\system32",
+    "c:\\program files",
+    "c:\\program files (x86)",
+    "c:\\programdata"
+]
 
 
 # -----------------------------------
@@ -67,7 +75,8 @@ def detect_suspicious_services(services):
 
     for service in services:
         name = service.get("name")
-        path = (service.get("path") or "").lower()
+        original_path = service.get("path") or ""
+        path = original_path.lower()
         start_mode = service.get("start_mode")
 
         # -----------------------------------
@@ -76,7 +85,7 @@ def detect_suspicious_services(services):
         for sp in SUSPICIOUS_PATHS:
             if sp in path:
                 alerts.append(
-                    f"Suspicious Service Path: {name} → {service.get('path')}"
+                    f"Suspicious Service Path: {name} → {original_path}"
                 )
 
         # -----------------------------------
@@ -84,31 +93,31 @@ def detect_suspicious_services(services):
         # -----------------------------------
         if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
             alerts.append(
-                f"Auto-Start Suspicious Service: {name} → {service.get('path')}"
+                f"Auto-Start Suspicious Service: {name} → {original_path}"
             )
 
         # -----------------------------------
-        # 3. Missing path (skip known system)
+        # 3. Missing path (ignore known system services)
         # -----------------------------------
         if not path and name not in KNOWN_SYSTEM_SERVICES:
             alerts.append(f"Service Missing Path: {name}")
 
         # -----------------------------------
-        # 4. New service detection
+        # 4. New service detection (baseline comparison)
         # -----------------------------------
         if baseline and name not in baseline:
             alerts.append(f"New Service Detected: {name}")
 
         # -----------------------------------
-        # 5. Basic permission misconfiguration
+        # 5. Improved permission/path check
         # -----------------------------------
-        if path and not path.startswith("c:\\windows\\system32"):
+        if path and not any(path.startswith(sd) for sd in SAFE_DIRECTORIES):
             alerts.append(
-                f"Service running outside system directory: {name} → {service.get('path')}"
+                f"Service running from unusual directory: {name} → {original_path}"
             )
 
     # -----------------------------------
-    # Save baseline if not exists
+    # Save baseline if first run
     # -----------------------------------
     if not baseline:
         save_baseline(services)
@@ -117,7 +126,7 @@ def detect_suspicious_services(services):
 
 
 # -----------------------------------
-# Print services (for demo)
+# Print sample services (for demo)
 # -----------------------------------
 def print_services(services, limit=10):
     print("\n⚙️ Startup Services (Sample):\n")
