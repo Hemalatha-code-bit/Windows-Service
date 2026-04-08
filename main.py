@@ -7,7 +7,7 @@ from utils.logger import log_alert
 
 
 def main():
-    print("🔍 Running Parent-Child Monitoring...\n")
+    print("Running Parent-Child Monitoring...\n")
 
     # Ensure logs folder exists
     if not os.path.exists("logs"):
@@ -26,10 +26,10 @@ def main():
     alerts = detect_anomalies(processes)
 
     # STEP 4: Print & log results
-    print("\n🔎 Detection Results:\n")
+    print("\nDetection Results:\n")
 
     if not alerts:
-        print("✅ No suspicious parent-child activity detected.")
+        print("No suspicious parent-child activity detected.")
     else:
         for alert in alerts:
             print(alert)
