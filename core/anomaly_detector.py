@@ -19,13 +19,13 @@ def detect_anomalies(processes):
         parent_name = (parent.get('name') or "").lower()
         child_name = (proc.get('name') or "").lower()
 
-        # 🚨 Suspicious Parent-Child
+        #  Suspicious Parent-Child
         if parent_name in SUSPICIOUS_PARENT_CHILD:
             if child_name in SUSPICIOUS_PARENT_CHILD[parent_name]:
-                alerts.append(f"🚨 Suspicious Parent-Child: {parent_name} → {child_name}")
+                alerts.append(f" Suspicious Parent-Child: {parent_name} → {child_name}")
 
-        # ⚠️ Possible Injection (LOLBins only)
+        #  Possible Injection (LOLBins only)
         if parent_name == "explorer.exe" and child_name in SUSPICIOUS_CHILD_PROCESSES:
-            alerts.append(f"⚠️ Possible Injection: {parent_name} → {child_name}")
+            alerts.append(f" Possible Injection: {parent_name} → {child_name}")
 
     return alerts
