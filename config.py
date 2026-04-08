@@ -7,7 +7,7 @@ SUSPICIOUS_PARENT_CHILD = {
     "winword.exe": ["cmd.exe", "powershell.exe", "wscript.exe"],
     "excel.exe": ["cmd.exe", "powershell.exe"],
     "outlook.exe": ["cmd.exe", "powershell.exe"],
-    "explorer.exe": ["powershell.exe", "cmd.exe"],  # ✅ Updated
+    "explorer.exe": ["powershell.exe", "cmd.exe"],  #  Updated
     "chrome.exe": ["cmd.exe"],
 }
 
