@@ -1,7 +1,12 @@
 
+<<<<<<< HEAD
  Suspicious Parent-Child: explorer.exe → cmd.exe
  Possible Injection: explorer.exe → cmd.exe
 Suspicious Parent-Child: explorer.exe → cmd.exe
 Possible Injection: explorer.exe → cmd.exe
+Suspicious Parent-Child: explorer.exe → cmd.exe
+Possible Injection: explorer.exe → cmd.exe
+=======
+>>>>>>> aa244a0e98a4e2028e741f846170a02bb260092d
 Suspicious Parent-Child: explorer.exe → cmd.exe
 Possible Injection: explorer.exe → cmd.exe
