@@ -5,7 +5,7 @@ from core.anomaly_detector import detect_anomalies
 
 
 def main():
-    print("🔍 Running Parent-Child Monitoring...\n")
+    print(" Running Parent-Child Monitoring...\n")
 
     # Step 1: Get processes
     processes = get_all_processes()
@@ -17,10 +17,10 @@ def main():
     alerts = detect_anomalies(processes)
 
     # Step 4: Print results
-    print("\n🔎 Detection Results:\n")
+    print("\n Detection Results:\n")
 
     if not alerts:
-        print("✅ No suspicious activity detected.")
+        print(" No suspicious activity detected.")
         return
 
     for alert in alerts:
