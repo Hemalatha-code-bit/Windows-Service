@@ -17,6 +17,7 @@ def load_json(file_path):
 
 def detect_unauthorized_processes(processes):
     alerts = []
+    seen = set()  # ✅ Prevent duplicate alerts
 
     whitelist = load_json("data/whitelist.json")
     blacklist = load_json("data/blacklist.json")
@@ -33,23 +34,28 @@ def detect_unauthorized_processes(processes):
         # 🚨 Blacklist detection (HIGH priority)
         # -----------------------------------
         if name in blacklist:
-            alerts.append(f"Blacklisted Process Detected: {name}")
+            alert_msg = f"Blacklisted Process Detected: {name}"
+            if alert_msg not in seen:
+                alerts.append(alert_msg)
+                seen.add(alert_msg)
 
         # -----------------------------------
-        # ⚠️ Unknown + suspicious only (reduce false positives)
+        # ⚠️ Unknown + suspicious only
         # -----------------------------------
         elif whitelist and name not in whitelist:
             if any(sp in path for sp in SUSPICIOUS_PATHS):
-                alerts.append(
-                    f"Unknown Suspicious Process: {name} -> {proc.get('exe')}"
-                )
+                alert_msg = f"Unknown Suspicious Process: {name} -> {proc.get('exe')}"
+                if alert_msg not in seen:
+                    alerts.append(alert_msg)
+                    seen.add(alert_msg)
 
         # -----------------------------------
         # 🚨 Suspicious path detection
         # -----------------------------------
         if any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(
-                f"Process Running from Suspicious Path: {name} -> {proc.get('exe')}"
-            )
+            alert_msg = f"Process Running from Suspicious Path: {name} -> {proc.get('exe')}"
+            if alert_msg not in seen:
+                alerts.append(alert_msg)
+                seen.add(alert_msg)
 
     return alerts
