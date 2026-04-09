@@ -19,19 +19,19 @@ def main():
     # -----------------------------------
     processes = get_all_processes()
 
-    # 🔴 DEMO: Parent-Child Attack Simulation
-    processes[99998] = {
-        "pid": 99998,
-        "ppid": 1234,
-        "name": "cmd.exe",
-        "exe": "C:\\Windows\\System32\\cmd.exe"
-    }
-
+    # ✅ DEMO: Parent must be created FIRST
     processes[1234] = {
         "pid": 1234,
         "ppid": 1,
         "name": "winword.exe",
         "exe": "C:\\Program Files\\Microsoft Office\\winword.exe"
+    }
+
+    processes[99998] = {
+        "pid": 99998,
+        "ppid": 1234,
+        "name": "cmd.exe",
+        "exe": "C:\\Windows\\System32\\cmd.exe"
     }
 
     print_process_lineage(processes)
@@ -43,7 +43,7 @@ def main():
     # -----------------------------------
     services = get_all_services()
 
-    # 🔴 DEMO: Suspicious Service
+    # ✅ DEMO: Suspicious service
     services.append({
         "name": "TestService",
         "display_name": "Malicious Service",
