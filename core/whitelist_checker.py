@@ -16,7 +16,7 @@ def load_json(file_path):
 
 def detect_unauthorized_processes(processes):
     alerts = []
-    seen = set()  # ✅ Track processed PIDs
+    seen = set()  # ✅ Track unique (process name + alert type)
 
     whitelist = load_json("data/whitelist.json")
     blacklist = load_json("data/blacklist.json")
@@ -65,10 +65,12 @@ def detect_unauthorized_processes(processes):
             continue
 
         # -----------------------------------
-        # ✅ FIX: Deduplicate by PID
+        # ✅ FINAL FIX: Deduplicate by (name + alert type)
         # -----------------------------------
-        if pid not in seen:
+        key = (name, alert_msg["alert"])
+
+        if key not in seen:
             alerts.append(alert_msg)
-            seen.add(pid)
+            seen.add(key)
 
     return alerts
