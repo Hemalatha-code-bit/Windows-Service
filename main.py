@@ -14,19 +14,54 @@ def main():
     os.makedirs("logs", exist_ok=True)
     os.makedirs("reports", exist_ok=True)
 
-    # Process Monitoring
+    # -----------------------------------
+    # 1. PROCESS MONITORING
+    # -----------------------------------
     processes = get_all_processes()
+
+    # 🔴 DEMO: Parent-Child Attack Simulation
+    processes[99998] = {
+        "pid": 99998,
+        "ppid": 1234,
+        "name": "cmd.exe",
+        "exe": "C:\\Windows\\System32\\cmd.exe"
+    }
+
+    processes[1234] = {
+        "pid": 1234,
+        "ppid": 1,
+        "name": "winword.exe",
+        "exe": "C:\\Program Files\\Microsoft Office\\winword.exe"
+    }
+
     print_process_lineage(processes)
+
     parent_alerts = detect_anomalies(processes)
 
-    # Service Audit
+    # -----------------------------------
+    # 2. SERVICE AUDIT
+    # -----------------------------------
     services = get_all_services()
+
+    # 🔴 DEMO: Suspicious Service
+    services.append({
+        "name": "TestService",
+        "display_name": "Malicious Service",
+        "state": "Running",
+        "start_mode": "Auto",
+        "path": "C:\\Users\\Public\\evil.exe"
+    })
+
     service_alerts = detect_suspicious_services(services)
 
-    # Unauthorized Detection
+    # -----------------------------------
+    # 3. UNAUTHORIZED PROCESS DETECTION
+    # -----------------------------------
     unauthorized_alerts = detect_unauthorized_processes(processes)
 
-    # Combine
+    # -----------------------------------
+    # COMBINE ALL ALERTS
+    # -----------------------------------
     all_alerts = parent_alerts + service_alerts + unauthorized_alerts
 
     print("\nDetection Results:\n")
@@ -44,6 +79,9 @@ def main():
             severity=alert.get("severity")
         )
 
+    # -----------------------------------
+    # SUMMARY
+    # -----------------------------------
     print("\nSummary:\n")
     print(f"Total Processes: {len(processes)}")
     print(f"Total Services: {len(services)}")
