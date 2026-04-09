@@ -8,26 +8,34 @@ FINAL_REPORT = "reports/final_report.txt"
 
 
 def generate_final_report():
-    print("👉 Generating final report...")
+    print("Generating final report...")
 
-    # Check if report.json exists
+    os.makedirs("reports", exist_ok=True)
+
+    # If report.json does not exist → still create file
     if not os.path.exists(REPORT_FILE):
-        print("❌ report.json not found!")
+        with open(FINAL_REPORT, "w") as f:
+            f.write("No report.json found.\n")
+        print("Final report created (no data).")
         return
 
-    # Read JSON safely
     try:
         with open(REPORT_FILE, "r") as f:
             content = f.read().strip()
 
+            # If empty → still create report
             if not content:
-                print("❌ report.json is empty!")
+                with open(FINAL_REPORT, "w") as f2:
+                    f2.write("No alerts found.\n")
+                print("Final report created (empty data).")
                 return
 
             data = json.loads(content)
 
     except Exception as e:
-        print("❌ Error reading report.json:", e)
+        with open(FINAL_REPORT, "w") as f:
+            f.write(f"Error reading report.json: {e}\n")
+        print("Final report created (error case).")
         return
 
     # Process data
@@ -37,21 +45,15 @@ def generate_final_report():
 
     findings = set(x.get("alert") for x in data)
 
-    # Write report
-    try:
-        os.makedirs("reports", exist_ok=True)
+    # ALWAYS write file (no skip)
+    with open(FINAL_REPORT, "w") as f:
+        f.write("===== SECURITY MONITORING REPORT =====\n\n")
+        f.write(f"Total Alerts: {total}\n")
+        f.write(f"High Severity: {high}\n")
+        f.write(f"Medium Severity: {medium}\n\n")
 
-        with open(FINAL_REPORT, "w") as f:
-            f.write("===== SECURITY MONITORING REPORT =====\n\n")
-            f.write(f"Total Alerts: {total}\n")
-            f.write(f"High Severity: {high}\n")
-            f.write(f"Medium Severity: {medium}\n\n")
+        f.write("Top Findings:\n")
+        for item in findings:
+            f.write(f"- {item}\n")
 
-            f.write("Top Findings:\n")
-            for item in findings:
-                f.write(f"- {item}\n")
-
-        print("✅ Final report generated: reports/final_report.txt")
-
-    except Exception as e:
-        print("❌ Error writing final report:", e)
+    print("Final report successfully generated!")
