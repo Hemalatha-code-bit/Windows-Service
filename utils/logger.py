@@ -19,7 +19,6 @@ def log_alert(alert, pid=None, path=None, severity="MEDIUM"):
         "severity": severity
     }
 
-    # Ensure folders exist
     os.makedirs("logs", exist_ok=True)
     os.makedirs("reports", exist_ok=True)
 
@@ -27,12 +26,19 @@ def log_alert(alert, pid=None, path=None, severity="MEDIUM"):
     with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(f"[{timestamp}] [{severity}] {alert} | PID={pid} | PATH={path}\n")
 
-    # Append to JSON report
+    # -----------------------------
+    # SAFE JSON LOAD (FIX)
+    # -----------------------------
+    data = []
+
     if os.path.exists(REPORT_FILE):
-        with open(REPORT_FILE, "r") as f:
-            data = json.load(f)
-    else:
-        data = []
+        try:
+            with open(REPORT_FILE, "r") as f:
+                content = f.read().strip()
+                if content:
+                    data = json.loads(content)
+        except json.JSONDecodeError:
+            data = []  # reset if corrupted
 
     data.append(log_entry)
 
