@@ -1,1 +1,8 @@
-
+[
+  "explorer.exe",
+  "svchost.exe",
+  "chrome.exe",
+  "msedge.exe",
+  "system",
+  "notepad.exe"
+]
