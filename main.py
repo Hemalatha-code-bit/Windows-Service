@@ -1,20 +1,3 @@
-# Add this inside loop (after path normalization)
-
-# Detect unusual non-standard paths (not in Program Files or Windows)
-if not any(x in path for x in ["windows", "program files"]):
-    alerts.append(f"Unusual Service Location: {name} → {raw_path}")
-
-    # TEST DATA (for demonstration purpose)
-services.append({
-    "name": "TestMalwareService",
-    "display_name": "Test Malware",
-    "state": "Running",
-    "start_mode": "Auto",
-    "path": "C:\\Users\\Public\\malware.exe"
-})
-
-
-add aboive mentioned code to main.py
 # main.py
 
 import os
@@ -37,6 +20,17 @@ def main():
     # STEP 1: Get all services
     # -----------------------------------
     services = get_all_services()
+
+    # -----------------------------------
+    # TEST DATA (for demonstration purpose)
+    # -----------------------------------
+    services.append({
+        "name": "TestMalwareService",
+        "display_name": "Test Malware",
+        "state": "Running",
+        "start_mode": "Auto",
+        "path": "C:\\Users\\Public\\malware.exe"
+    })
 
     # -----------------------------------
     # STEP 2: Print services
