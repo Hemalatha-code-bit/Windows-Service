@@ -28,24 +28,36 @@ def detect_unauthorized_processes(processes):
         if not name:
             continue
 
-        # Blacklist (highest priority)
         if name in blacklist:
-            alert_msg = f"Blacklisted Process Detected: {name}"
-        
-        # Unknown + suspicious = HIGH RISK
+            alert_msg = {
+                "alert": f"Blacklisted Process Detected: {name}",
+                "pid": pid,
+                "path": proc.get("exe"),
+                "severity": "HIGH"
+            }
+
         elif whitelist and name not in whitelist and any(sp in path for sp in SUSPICIOUS_PATHS):
-            alert_msg = f"High-Risk Process: {name} -> {proc.get('exe')}"
-        
-        # Only suspicious path
+            alert_msg = {
+                "alert": f"High-Risk Process: {name}",
+                "pid": pid,
+                "path": proc.get("exe"),
+                "severity": "HIGH"
+            }
+
         elif any(sp in path for sp in SUSPICIOUS_PATHS):
-            alert_msg = f"Suspicious Path Process: {name} -> {proc.get('exe')}"
-        
+            alert_msg = {
+                "alert": f"Suspicious Path Process: {name}",
+                "pid": pid,
+                "path": proc.get("exe"),
+                "severity": "MEDIUM"
+            }
+
         else:
             continue
 
-        # جلوگیری duplicate alerts
-        if alert_msg not in seen:
+        key = (alert_msg["alert"], alert_msg["pid"], alert_msg["path"])
+        if key not in seen:
             alerts.append(alert_msg)
-            seen.add(alert_msg)
+            seen.add(key)
 
     return alerts
