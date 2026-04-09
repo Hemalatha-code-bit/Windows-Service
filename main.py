@@ -1,61 +1,45 @@
 # main.py
 
 import os
-from core.service_audit import (
-    get_all_services,
-    detect_suspicious_services,
-    print_services
-)
+from core.process_monitor import get_all_processes
+from core.whitelist_checker import detect_unauthorized_processes
 from utils.logger import log_alert
 
 
 def main():
-    print("Running Startup Service Audit...\n")
+    print("Running Unauthorized Process Detection...\n")
 
     # Ensure logs folder exists
     if not os.path.exists("logs"):
         os.makedirs("logs")
 
-    # -----------------------------------
-    # STEP 1: Get all services
-    # -----------------------------------
-    services = get_all_services()
+    # STEP 1: Get processes
+    processes = get_all_processes()
 
     # -----------------------------------
-    # TEST DATA (for demonstration purpose)
+    # TEST DATA (for demo)
     # -----------------------------------
-    services.append({
-        "name": "TestMalwareService",
-        "display_name": "Test Malware",
-        "state": "Running",
-        "start_mode": "Auto",
-        "path": "C:\\Users\\Public\\malware.exe"
-    })
+    processes[99999] = {
+        "pid": 99999,
+        "ppid": 1234,
+        "name": "malware.exe",
+        "exe": "C:\\Users\\Public\\malware.exe"
+    }
 
-    # -----------------------------------
-    # STEP 2: Print services
-    # -----------------------------------
-    print_services(services)
+    # STEP 2: Detect unauthorized processes
+    alerts = detect_unauthorized_processes(processes)
 
-    # -----------------------------------
-    # STEP 3: Detect suspicious services
-    # -----------------------------------
-    alerts = detect_suspicious_services(services)
-
-    print("\nService Audit Results:\n")
+    print("Unauthorized Process Detection Results:\n")
 
     if not alerts:
-        print("No suspicious services detected.")
+        print("No unauthorized processes detected.")
     else:
         for alert in alerts:
             print(alert)
             log_alert(alert)
 
-    # -----------------------------------
-    # SUMMARY
-    # -----------------------------------
     print("\nSummary:\n")
-    print(f"Total Services Scanned: {len(services)}")
+    print(f"Total Processes Scanned: {len(processes)}")
     print(f"Total Alerts: {len(alerts)}")
 
 
