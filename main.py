@@ -6,6 +6,7 @@ from core.anomaly_detector import detect_anomalies
 from core.service_audit import get_all_services, detect_suspicious_services
 from core.whitelist_checker import detect_unauthorized_processes
 from utils.logger import log_alert
+from utils.report_generator import generate_final_report
 
 
 def main():
@@ -19,7 +20,7 @@ def main():
     # -----------------------------------
     processes = get_all_processes()
 
-    # ✅ DEMO: Parent must be created FIRST
+    # DEMO: Parent first
     processes[1234] = {
         "pid": 1234,
         "ppid": 1,
@@ -35,7 +36,6 @@ def main():
     }
 
     print_process_lineage(processes)
-
     parent_alerts = detect_anomalies(processes)
 
     # -----------------------------------
@@ -43,7 +43,6 @@ def main():
     # -----------------------------------
     services = get_all_services()
 
-    # ✅ DEMO: Suspicious service
     services.append({
         "name": "TestService",
         "display_name": "Malicious Service",
@@ -68,16 +67,15 @@ def main():
 
     if not all_alerts:
         print("No suspicious activity detected.")
-        return
-
-    for alert in all_alerts:
-        print(alert["alert"])
-        log_alert(
-            alert["alert"],
-            pid=alert.get("pid"),
-            path=alert.get("path"),
-            severity=alert.get("severity")
-        )
+    else:
+        for alert in all_alerts:
+            print(alert["alert"])
+            log_alert(
+                alert["alert"],
+                pid=alert.get("pid"),
+                path=alert.get("path"),
+                severity=alert.get("severity")
+            )
 
     # -----------------------------------
     # SUMMARY
@@ -86,6 +84,11 @@ def main():
     print(f"Total Processes: {len(processes)}")
     print(f"Total Services: {len(services)}")
     print(f"Total Alerts: {len(all_alerts)}")
+
+    # -----------------------------------
+    # GENERATE FINAL REPORT (FIXED)
+    # -----------------------------------
+    generate_final_report()
 
 
 if __name__ == "__main__":
