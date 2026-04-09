@@ -33,17 +33,27 @@ def detect_suspicious_services(services):
 
         # Missing or empty path
         if not path:
-            alerts.append(f"Service Missing Path: {name}")
+            alerts.append({
+                "alert": f"Service Missing Path: {name}",
+                "pid": None,
+                "path": None,
+                "severity": "MEDIUM"
+            })
             continue
 
         # Normalize quotes
         path = path.replace('"', '')
 
         # -----------------------------------
-        # ✅ Unusual non-standard path detection
+        # Unusual non-standard path detection
         # -----------------------------------
         if not any(x in path for x in ["windows", "program files", "program files (x86)"]):
-            alerts.append(f"Unusual Service Location: {name} -> {raw_path}")
+            alerts.append({
+                "alert": f"Unusual Service Location: {name}",
+                "pid": None,
+                "path": raw_path,
+                "severity": "MEDIUM"
+            })
 
         # -----------------------------------
         # Skip trusted Windows directories
@@ -58,15 +68,30 @@ def detect_suspicious_services(services):
 
         # Suspicious path detection
         if any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(f"Suspicious Service Path: {name} -> {raw_path}")
+            alerts.append({
+                "alert": f"Suspicious Service Path: {name}",
+                "pid": None,
+                "path": raw_path,
+                "severity": "MEDIUM"
+            })
 
-        # Auto-start + suspicious path (persistence indicator)
+        # Auto-start + suspicious path (HIGH)
         if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(f"Auto-Start Suspicious Service: {name} -> {raw_path}")
+            alerts.append({
+                "alert": f"Auto-Start Suspicious Service: {name}",
+                "pid": None,
+                "path": raw_path,
+                "severity": "HIGH"
+            })
 
-        # Permission risk (user-writable directory execution)
+        # Permission risk (HIGH)
         if "users" in path:
-            alerts.append(f"Potential Weak Permission Service: {name} -> {raw_path}")
+            alerts.append({
+                "alert": f"Potential Weak Permission Service: {name}",
+                "pid": None,
+                "path": raw_path,
+                "severity": "HIGH"
+            })
 
     return alerts
 
