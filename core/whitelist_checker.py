@@ -16,7 +16,7 @@ def load_json(file_path):
 
 def detect_unauthorized_processes(processes):
     alerts = []
-    seen = set()
+    seen = set()  # ✅ Track processed PIDs
 
     whitelist = load_json("data/whitelist.json")
     blacklist = load_json("data/blacklist.json")
@@ -28,6 +28,9 @@ def detect_unauthorized_processes(processes):
         if not name:
             continue
 
+        # -----------------------------------
+        # 🚨 Blacklist (HIGH priority)
+        # -----------------------------------
         if name in blacklist:
             alert_msg = {
                 "alert": f"Blacklisted Process Detected: {name}",
@@ -36,6 +39,9 @@ def detect_unauthorized_processes(processes):
                 "severity": "HIGH"
             }
 
+        # -----------------------------------
+        # 🚨 High-Risk (unknown + suspicious)
+        # -----------------------------------
         elif whitelist and name not in whitelist and any(sp in path for sp in SUSPICIOUS_PATHS):
             alert_msg = {
                 "alert": f"High-Risk Process: {name}",
@@ -44,6 +50,9 @@ def detect_unauthorized_processes(processes):
                 "severity": "HIGH"
             }
 
+        # -----------------------------------
+        # ⚠️ Suspicious path only
+        # -----------------------------------
         elif any(sp in path for sp in SUSPICIOUS_PATHS):
             alert_msg = {
                 "alert": f"Suspicious Path Process: {name}",
@@ -55,9 +64,11 @@ def detect_unauthorized_processes(processes):
         else:
             continue
 
-        key = (alert_msg["alert"], alert_msg["pid"], alert_msg["path"])
-        if key not in seen:
+        # -----------------------------------
+        # ✅ FIX: Deduplicate by PID
+        # -----------------------------------
+        if pid not in seen:
             alerts.append(alert_msg)
-            seen.add(key)
+            seen.add(pid)
 
     return alerts
