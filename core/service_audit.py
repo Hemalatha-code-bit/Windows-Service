@@ -31,7 +31,7 @@ def detect_suspicious_services(services):
         path = raw_path.lower().strip()
         start_mode = service.get("start_mode")
 
-        #Missing or empty path
+        # Missing or empty path
         if not path:
             alerts.append(f"Service Missing Path: {name}")
             continue
@@ -39,7 +39,15 @@ def detect_suspicious_services(services):
         # Normalize quotes
         path = path.replace('"', '')
 
-        # Skip trusted Windows directories (reduce false positives)
+        # -----------------------------------
+        # ✅ Unusual non-standard path detection
+        # -----------------------------------
+        if not any(x in path for x in ["windows", "program files", "program files (x86)"]):
+            alerts.append(f"Unusual Service Location: {name} → {raw_path}")
+
+        # -----------------------------------
+        # Skip trusted Windows directories
+        # -----------------------------------
         if any(x in path for x in [
             "windows\\system32",
             "windows\\syswow64",
@@ -48,15 +56,15 @@ def detect_suspicious_services(services):
         ]):
             continue
 
-        #Suspicious path detection
+        # Suspicious path detection
         if any(sp in path for sp in SUSPICIOUS_PATHS):
             alerts.append(f"Suspicious Service Path: {name} → {raw_path}")
 
-        #Auto-start + suspicious path (persistence indicator)
+        # Auto-start + suspicious path (persistence indicator)
         if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
             alerts.append(f"Auto-Start Suspicious Service: {name} → {raw_path}")
 
-        #Permission risk (user-writable directory execution)
+        # Permission risk (user-writable directory execution)
         if "users" in path:
             alerts.append(f"Potential Weak Permission Service: {name} → {raw_path}")
 
