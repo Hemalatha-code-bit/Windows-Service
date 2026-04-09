@@ -3,7 +3,7 @@
 import json
 import os
 
-# Suspicious locations
+# Suspicious locations (user-writable)
 SUSPICIOUS_PATHS = ["appdata", "temp", "downloads", "users"]
 
 
@@ -25,16 +25,31 @@ def detect_unauthorized_processes(processes):
         name = (proc.get("name") or "").lower()
         path = (proc.get("exe") or "").lower()
 
-        # 🚨 Blacklist detection
+        # Skip empty process names
+        if not name:
+            continue
+
+        # -----------------------------------
+        # 🚨 Blacklist detection (HIGH priority)
+        # -----------------------------------
         if name in blacklist:
             alerts.append(f"Blacklisted Process Detected: {name}")
 
-        # ⚠️ Unknown process
+        # -----------------------------------
+        # ⚠️ Unknown + suspicious only (reduce false positives)
+        # -----------------------------------
         elif whitelist and name not in whitelist:
-            alerts.append(f"Unknown Process Detected: {name}")
+            if any(sp in path for sp in SUSPICIOUS_PATHS):
+                alerts.append(
+                    f"Unknown Suspicious Process: {name} -> {proc.get('exe')}"
+                )
 
+        # -----------------------------------
         # 🚨 Suspicious path detection
+        # -----------------------------------
         if any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(f"Process Running from Suspicious Path: {name} -> {proc.get('exe')}")
+            alerts.append(
+                f"Process Running from Suspicious Path: {name} -> {proc.get('exe')}"
+            )
 
     return alerts
