@@ -3,7 +3,6 @@
 import json
 import os
 
-# Suspicious locations (user-writable)
 SUSPICIOUS_PATHS = ["appdata", "temp", "downloads", "users"]
 
 
@@ -17,7 +16,7 @@ def load_json(file_path):
 
 def detect_unauthorized_processes(processes):
     alerts = []
-    seen = set()  #Prevent duplicate alerts
+    seen = set()
 
     whitelist = load_json("data/whitelist.json")
     blacklist = load_json("data/blacklist.json")
@@ -26,36 +25,27 @@ def detect_unauthorized_processes(processes):
         name = (proc.get("name") or "").lower()
         path = (proc.get("exe") or "").lower()
 
-        # Skip empty process names
         if not name:
             continue
 
-        # -----------------------------------
-        #Blacklist detection (HIGH priority)
-        # -----------------------------------
+        # 🚨 Blacklist (highest priority)
         if name in blacklist:
             alert_msg = f"Blacklisted Process Detected: {name}"
-            if alert_msg not in seen:
-                alerts.append(alert_msg)
-                seen.add(alert_msg)
+        
+        # 🚨 Unknown + suspicious = HIGH RISK
+        elif whitelist and name not in whitelist and any(sp in path for sp in SUSPICIOUS_PATHS):
+            alert_msg = f"High-Risk Process: {name} -> {proc.get('exe')}"
+        
+        # ⚠️ Only suspicious path
+        elif any(sp in path for sp in SUSPICIOUS_PATHS):
+            alert_msg = f"Suspicious Path Process: {name} -> {proc.get('exe')}"
+        
+        else:
+            continue
 
-        # -----------------------------------
-        #Unknown + suspicious only
-        # -----------------------------------
-        elif whitelist and name not in whitelist:
-            if any(sp in path for sp in SUSPICIOUS_PATHS):
-                alert_msg = f"Unknown Suspicious Process: {name} -> {proc.get('exe')}"
-                if alert_msg not in seen:
-                    alerts.append(alert_msg)
-                    seen.add(alert_msg)
-
-        # -----------------------------------
-        #Suspicious path detection
-        # -----------------------------------
-        if any(sp in path for sp in SUSPICIOUS_PATHS):
-            alert_msg = f"Process Running from Suspicious Path: {name} -> {proc.get('exe')}"
-            if alert_msg not in seen:
-                alerts.append(alert_msg)
-                seen.add(alert_msg)
+        # جلوگیری duplicate alerts
+        if alert_msg not in seen:
+            alerts.append(alert_msg)
+            seen.add(alert_msg)
 
     return alerts
