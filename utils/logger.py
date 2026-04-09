@@ -6,7 +6,7 @@ import os
 
 LOG_FILE = "logs/monitoring.log"
 REPORT_FILE = "reports/report.json"
-REPORTFILE_TXT = "reports/report.txt"
+REPORTFILE_TXT = "reports/final_report.txt"
 
 
 def log_alert(alert, pid=None, path=None, severity="MEDIUM"):
