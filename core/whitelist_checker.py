@@ -28,15 +28,15 @@ def detect_unauthorized_processes(processes):
         if not name:
             continue
 
-        # 🚨 Blacklist (highest priority)
+        # Blacklist (highest priority)
         if name in blacklist:
             alert_msg = f"Blacklisted Process Detected: {name}"
         
-        # 🚨 Unknown + suspicious = HIGH RISK
+        # Unknown + suspicious = HIGH RISK
         elif whitelist and name not in whitelist and any(sp in path for sp in SUSPICIOUS_PATHS):
             alert_msg = f"High-Risk Process: {name} -> {proc.get('exe')}"
         
-        # ⚠️ Only suspicious path
+        # Only suspicious path
         elif any(sp in path for sp in SUSPICIOUS_PATHS):
             alert_msg = f"Suspicious Path Process: {name} -> {proc.get('exe')}"
         
