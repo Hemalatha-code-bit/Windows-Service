@@ -177,3 +177,57 @@
 [2026-04-09 22:23:45] Suspicious Path Process: python.exe -> C:\Users\Win\Windows-Service\venv\Scripts\python.exe
 [2026-04-09 22:23:45] High-Risk Process: filecoauth.exe -> C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\FileCoAuth.exe
 [2026-04-09 22:23:45] Blacklisted Process Detected: malware.exe
+[2026-04-09 22:44:03] [MEDIUM] Service Missing Path: LSM | PID=None | PATH=None
+[2026-04-09 22:46:59] [MEDIUM] Service Missing Path: LSM | PID=None | PATH=None
+[2026-04-09 22:46:59] [MEDIUM] Service Missing Path: NetSetupSvc | PID=None | PATH=None
+[2026-04-09 22:46:59] [MEDIUM] Suspicious Path Process: onedrive.exe | PID=6564 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\OneDrive.exe
+[2026-04-09 22:46:59] [MEDIUM] Suspicious Path Process: python.exe | PID=10820 | PATH=C:\Users\Win\AppData\Local\Python\pythoncore-3.14-64\python.exe
+[2026-04-09 22:46:59] [MEDIUM] Suspicious Path Process: python.exe | PID=13992 | PATH=C:\Users\Win\Windows-Service\venv\Scripts\python.exe
+[2026-04-09 22:46:59] [HIGH] High-Risk Process: onedrive.sync.service.exe | PID=15816 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\OneDrive.Sync.Service.exe
+[2026-04-09 22:46:59] [HIGH] High-Risk Process: filecoauth.exe | PID=18700 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\FileCoAuth.exe
+[2026-04-09 22:51:22] [MEDIUM] Service Missing Path: LSM | PID=None | PATH=None
+[2026-04-09 22:51:22] [MEDIUM] Service Missing Path: NetSetupSvc | PID=None | PATH=None
+[2026-04-09 22:51:22] [MEDIUM] Unusual Service Location: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:51:22] [MEDIUM] Suspicious Service Path: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:51:22] [HIGH] Auto-Start Suspicious Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:51:22] [HIGH] Potential Weak Permission Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:51:22] [MEDIUM] Suspicious Path Process: onedrive.exe | PID=6564 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\OneDrive.exe
+[2026-04-09 22:51:22] [MEDIUM] Suspicious Path Process: python.exe | PID=9884 | PATH=C:\Users\Win\AppData\Local\Python\pythoncore-3.14-64\python.exe
+[2026-04-09 22:51:22] [MEDIUM] Suspicious Path Process: python.exe | PID=13900 | PATH=C:\Users\Win\Windows-Service\venv\Scripts\python.exe
+[2026-04-09 22:51:22] [HIGH] High-Risk Process: onedrive.sync.service.exe | PID=15816 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\OneDrive.Sync.Service.exe
+[2026-04-09 22:51:22] [HIGH] High-Risk Process: filecoauth.exe | PID=18700 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\FileCoAuth.exe
+[2026-04-09 22:55:21] [HIGH] Suspicious Parent-Child: winword.exe -> cmd.exe | PID=99998 | PATH=C:\Windows\System32\cmd.exe
+[2026-04-09 22:55:21] [MEDIUM] Service Missing Path: LSM | PID=None | PATH=None
+[2026-04-09 22:55:21] [MEDIUM] Service Missing Path: NetSetupSvc | PID=None | PATH=None
+[2026-04-09 22:55:21] [MEDIUM] Unusual Service Location: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:55:21] [MEDIUM] Suspicious Service Path: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:55:21] [HIGH] Auto-Start Suspicious Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:55:21] [HIGH] Potential Weak Permission Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:55:21] [MEDIUM] Suspicious Path Process: onedrive.exe | PID=6564 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\OneDrive.exe
+[2026-04-09 22:55:21] [MEDIUM] Suspicious Path Process: python.exe | PID=14320 | PATH=C:\Users\Win\Windows-Service\venv\Scripts\python.exe
+[2026-04-09 22:55:21] [HIGH] High-Risk Process: onedrive.sync.service.exe | PID=15816 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\OneDrive.Sync.Service.exe
+[2026-04-09 22:55:21] [MEDIUM] Suspicious Path Process: python.exe | PID=17196 | PATH=C:\Users\Win\AppData\Local\Python\pythoncore-3.14-64\python.exe
+[2026-04-09 22:55:21] [HIGH] High-Risk Process: filecoauth.exe | PID=18700 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\FileCoAuth.exe
+[2026-04-09 22:59:11] [HIGH] Suspicious Parent-Child: winword.exe -> cmd.exe | PID=99998 | PATH=C:\Windows\System32\cmd.exe
+[2026-04-09 22:59:11] [MEDIUM] Service Missing Path: LSM | PID=None | PATH=None
+[2026-04-09 22:59:11] [MEDIUM] Service Missing Path: NetSetupSvc | PID=None | PATH=None
+[2026-04-09 22:59:11] [MEDIUM] Unusual Service Location: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:59:11] [MEDIUM] Suspicious Service Path: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:59:11] [HIGH] Auto-Start Suspicious Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:59:11] [HIGH] Potential Weak Permission Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 22:59:11] [MEDIUM] Suspicious Path Process: onedrive.exe | PID=6564 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\OneDrive.exe
+[2026-04-09 22:59:11] [MEDIUM] Suspicious Path Process: python.exe | PID=9340 | PATH=C:\Users\Win\AppData\Local\Python\pythoncore-3.14-64\python.exe
+[2026-04-09 22:59:11] [MEDIUM] Suspicious Path Process: python.exe | PID=15444 | PATH=C:\Users\Win\Windows-Service\venv\Scripts\python.exe
+[2026-04-09 22:59:11] [HIGH] High-Risk Process: onedrive.sync.service.exe | PID=15816 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\OneDrive.Sync.Service.exe
+[2026-04-09 22:59:11] [HIGH] High-Risk Process: filecoauth.exe | PID=18700 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\FileCoAuth.exe
+[2026-04-09 23:04:24] [HIGH] Suspicious Parent-Child: winword.exe -> cmd.exe | PID=99998 | PATH=C:\Windows\System32\cmd.exe
+[2026-04-09 23:04:24] [MEDIUM] Service Missing Path: LSM | PID=None | PATH=None
+[2026-04-09 23:04:24] [MEDIUM] Service Missing Path: NetSetupSvc | PID=None | PATH=None
+[2026-04-09 23:04:24] [MEDIUM] Unusual Service Location: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 23:04:24] [MEDIUM] Suspicious Service Path: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 23:04:24] [HIGH] Auto-Start Suspicious Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 23:04:24] [HIGH] Potential Weak Permission Service: TestService | PID=None | PATH=C:\Users\Public\evil.exe
+[2026-04-09 23:04:24] [MEDIUM] Suspicious Path Process: onedrive.exe | PID=6564 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\OneDrive.exe
+[2026-04-09 23:04:24] [HIGH] High-Risk Process: onedrive.sync.service.exe | PID=15816 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\OneDrive.Sync.Service.exe
+[2026-04-09 23:04:24] [MEDIUM] Suspicious Path Process: python.exe | PID=16136 | PATH=C:\Users\Win\Windows-Service\venv\Scripts\python.exe
+[2026-04-09 23:04:24] [HIGH] High-Risk Process: filecoauth.exe | PID=18700 | PATH=C:\Users\Win\AppData\Local\Microsoft\OneDrive\26.040.0301.0001\FileCoAuth.exe
