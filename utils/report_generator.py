@@ -8,24 +8,31 @@ FINAL_REPORT = "reports/final_report.txt"
 
 
 def generate_final_report():
+    print("Generating final report...")  # DEBUG
+
     if not os.path.exists(REPORT_FILE):
         print("No report.json found.")
         return
 
-    with open(REPORT_FILE, "r") as f:
-        try:
-            data = json.load(f)
-        except:
-            print("Invalid JSON report.")
-            return
+    try:
+        with open(REPORT_FILE, "r") as f:
+            content = f.read().strip()
+
+            if not content:
+                print("report.json is empty.")
+                return
+
+            data = json.loads(content)
+
+    except Exception as e:
+        print("Error reading report.json:", e)
+        return
 
     total = len(data)
-    high = sum(1 for x in data if x["severity"] == "HIGH")
-    medium = sum(1 for x in data if x["severity"] == "MEDIUM")
+    high = sum(1 for x in data if x.get("severity") == "HIGH")
+    medium = sum(1 for x in data if x.get("severity") == "MEDIUM")
 
-    findings = set()
-    for entry in data:
-        findings.add(entry["alert"])
+    findings = set(x.get("alert") for x in data)
 
     os.makedirs("reports", exist_ok=True)
 
@@ -39,4 +46,4 @@ def generate_final_report():
         for item in findings:
             f.write(f"- {item}\n")
 
-    print("Final report generated: reports/final_report.txt")
+    print("Final report generated successfully!")
