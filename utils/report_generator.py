@@ -12,20 +12,20 @@ def generate_final_report():
 
     os.makedirs("reports", exist_ok=True)
 
-    # If report.json does not exist → still create file
+    # Check if report.json exists
     if not os.path.exists(REPORT_FILE):
-        with open(FINAL_REPORT, "w") as f:
+        with open(FINAL_REPORT, "w", encoding="utf-8") as f:
             f.write("No report.json found.\n")
         print("Final report created (no data).")
         return
 
+    # Read JSON safely
     try:
-        with open(REPORT_FILE, "r") as f:
+        with open(REPORT_FILE, "r", encoding="utf-8") as f:
             content = f.read().strip()
 
-            # If empty → still create report
             if not content:
-                with open(FINAL_REPORT, "w") as f2:
+                with open(FINAL_REPORT, "w", encoding="utf-8") as f2:
                     f2.write("No alerts found.\n")
                 print("Final report created (empty data).")
                 return
@@ -33,7 +33,7 @@ def generate_final_report():
             data = json.loads(content)
 
     except Exception as e:
-        with open(FINAL_REPORT, "w") as f:
+        with open(FINAL_REPORT, "w", encoding="utf-8") as f:
             f.write(f"Error reading report.json: {e}\n")
         print("Final report created (error case).")
         return
@@ -43,10 +43,17 @@ def generate_final_report():
     high = sum(1 for x in data if x.get("severity") == "HIGH")
     medium = sum(1 for x in data if x.get("severity") == "MEDIUM")
 
-    findings = set(x.get("alert") for x in data)
+    print("Total alerts loaded:", total)  # DEBUG
 
-    # ALWAYS write file (no skip)
-    with open(FINAL_REPORT, "w") as f:
+    # Safe findings extraction
+    findings = set()
+    for x in data:
+        alert = x.get("alert")
+        if alert:
+            findings.add(alert)
+
+    # Write final report (FIXED)
+    with open(FINAL_REPORT, "w", encoding="utf-8") as f:
         f.write("===== SECURITY MONITORING REPORT =====\n\n")
         f.write(f"Total Alerts: {total}\n")
         f.write(f"High Severity: {high}\n")
@@ -54,6 +61,8 @@ def generate_final_report():
 
         f.write("Top Findings:\n")
         for item in findings:
-            f.write(f"- {item}\n")
+            f.write("- " + str(item) + "\n")
+
+        f.write("\n--- End of Report ---\n")
 
     print("Final report successfully generated!")
