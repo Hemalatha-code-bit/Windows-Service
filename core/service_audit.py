@@ -43,7 +43,7 @@ def detect_suspicious_services(services):
         # ✅ Unusual non-standard path detection
         # -----------------------------------
         if not any(x in path for x in ["windows", "program files", "program files (x86)"]):
-            alerts.append(f"Unusual Service Location: {name} → {raw_path}")
+            alerts.append(f"Unusual Service Location: {name} -> {raw_path}")
 
         # -----------------------------------
         # Skip trusted Windows directories
@@ -58,15 +58,15 @@ def detect_suspicious_services(services):
 
         # Suspicious path detection
         if any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(f"Suspicious Service Path: {name} → {raw_path}")
+            alerts.append(f"Suspicious Service Path: {name} -> {raw_path}")
 
         # Auto-start + suspicious path (persistence indicator)
         if start_mode == "Auto" and any(sp in path for sp in SUSPICIOUS_PATHS):
-            alerts.append(f"Auto-Start Suspicious Service: {name} → {raw_path}")
+            alerts.append(f"Auto-Start Suspicious Service: {name} -> {raw_path}")
 
         # Permission risk (user-writable directory execution)
         if "users" in path:
-            alerts.append(f"Potential Weak Permission Service: {name} → {raw_path}")
+            alerts.append(f"Potential Weak Permission Service: {name} -> {raw_path}")
 
     return alerts
 
