@@ -11,13 +11,6 @@ This project monitors Windows processes and services to detect suspicious behavi
 * Unauthorized process detection (whitelist/blacklist)
 * Alert logging in JSON format
 
-#########  Setup ######### 
-
-```bash
-pip install -r requirements.txt
-python main.py
-```
-
 #########  Output ######### 
 
 * `logs/monitoring.log` – readable logs
