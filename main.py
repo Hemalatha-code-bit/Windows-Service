@@ -6,7 +6,6 @@ from core.anomaly_detector import detect_anomalies
 from core.service_audit import get_all_services, detect_suspicious_services
 from core.whitelist_checker import detect_unauthorized_processes
 from utils.logger import log_alert
-from utils.report_generator import generate_final_report
 
 
 def main():
@@ -84,11 +83,6 @@ def main():
     print(f"Total Processes: {len(processes)}")
     print(f"Total Services: {len(services)}")
     print(f"Total Alerts: {len(all_alerts)}")
-
-    # -----------------------------------
-    # GENERATE FINAL REPORT (FIXED)
-    # -----------------------------------
-    generate_final_report()
 
 
 if __name__ == "__main__":
