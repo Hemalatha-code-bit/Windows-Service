@@ -20,7 +20,7 @@ def detect_anomalies(processes):
         path = proc.get("exe")
 
         # -----------------------------------
-        # ✅ Suspicious Parent-Child (CONFIG BASED)
+        #Suspicious Parent-Child (CONFIG BASED)
         # -----------------------------------
         if parent_name in SUSPICIOUS_PARENT_CHILD:
             if child_name in SUSPICIOUS_PARENT_CHILD[parent_name]:
@@ -32,7 +32,7 @@ def detect_anomalies(processes):
                 })
 
         # -----------------------------------
-        # ✅ Injection detection
+        #Injection detection
         # -----------------------------------
         if parent_name == "explorer.exe" and child_name in SUSPICIOUS_CHILD_PROCESSES:
             alerts.append({
