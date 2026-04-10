@@ -16,7 +16,7 @@ def load_json(file_path):
 
 def detect_unauthorized_processes(processes):
     alerts = []
-    seen = set()  # ✅ Track unique (process name + alert type)
+    seen = set()  #Track unique (process name + alert type)
 
     whitelist = load_json("data/whitelist.json")
     blacklist = load_json("data/blacklist.json")
@@ -29,7 +29,7 @@ def detect_unauthorized_processes(processes):
             continue
 
         # -----------------------------------
-        # 🚨 Blacklist (HIGH priority)
+        #Blacklist (HIGH priority)
         # -----------------------------------
         if name in blacklist:
             alert_msg = {
@@ -40,7 +40,7 @@ def detect_unauthorized_processes(processes):
             }
 
         # -----------------------------------
-        # 🚨 High-Risk (unknown + suspicious)
+        #High-Risk (unknown + suspicious)
         # -----------------------------------
         elif whitelist and name not in whitelist and any(sp in path for sp in SUSPICIOUS_PATHS):
             alert_msg = {
@@ -51,7 +51,7 @@ def detect_unauthorized_processes(processes):
             }
 
         # -----------------------------------
-        # ⚠️ Suspicious path only
+        #Suspicious path only
         # -----------------------------------
         elif any(sp in path for sp in SUSPICIOUS_PATHS):
             alert_msg = {
@@ -65,7 +65,7 @@ def detect_unauthorized_processes(processes):
             continue
 
         # -----------------------------------
-        # ✅ FINAL FIX: Deduplicate by (name + alert type)
+        #FINAL FIX: Deduplicate by (name + alert type)
         # -----------------------------------
         key = (name, alert_msg["alert"])
 
