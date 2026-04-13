@@ -439,5 +439,152 @@
         "pid": 17988,
         "path": "C:\\Users\\Win\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
         "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Suspicious Parent-Child: winword.exe -> cmd.exe",
+        "pid": 99998,
+        "path": "C:\\Windows\\System32\\cmd.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Service Missing Path: LSM",
+        "pid": null,
+        "path": null,
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Service Missing Path: NetSetupSvc",
+        "pid": null,
+        "path": null,
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Unusual Service Location: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Suspicious Service Path: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Auto-Start Suspicious Service: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Potential Weak Permission Service: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "High-Risk Process: onedrive.sync.service.exe",
+        "pid": 1664,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Microsoft\\OneDrive\\26.040.0301.0001\\OneDrive.Sync.Service.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Suspicious Path Process: python.exe",
+        "pid": 2368,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "High-Risk Process: filecoauth.exe",
+        "pid": 17432,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Microsoft\\OneDrive\\26.040.0301.0001\\FileCoAuth.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-10 22:10:46",
+        "alert": "Suspicious Path Process: onedrive.exe",
+        "pid": 17988,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Suspicious Parent-Child: winword.exe -> cmd.exe",
+        "pid": 99998,
+        "path": "C:\\Windows\\System32\\cmd.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Service Missing Path: LSM",
+        "pid": null,
+        "path": null,
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Service Missing Path: NetSetupSvc",
+        "pid": null,
+        "path": null,
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Unusual Service Location: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Suspicious Service Path: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Auto-Start Suspicious Service: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Potential Weak Permission Service: TestService",
+        "pid": null,
+        "path": "C:\\Users\\Public\\evil.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Suspicious Path Process: python.exe",
+        "pid": 6724,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe",
+        "severity": "MEDIUM"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "High-Risk Process: onedrive.sync.service.exe",
+        "pid": 19080,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Microsoft\\OneDrive\\26.051.0316.0004_1\\OneDrive.Sync.Service.exe",
+        "severity": "HIGH"
+    },
+    {
+        "timestamp": "2026-04-13 14:52:38",
+        "alert": "Suspicious Path Process: onedrive.exe",
+        "pid": 19696,
+        "path": "C:\\Users\\Win\\AppData\\Local\\Microsoft\\OneDrive\\OneDrive.exe",
+        "severity": "MEDIUM"
     }
 ]
